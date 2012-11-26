@@ -4,13 +4,16 @@ require_once("../application/models/matrixModel.php");
 
 if($_POST) // a button was pressed
 {
-	//FIXME: If the button 'transpose' is pressed, dimMatrix shouldn't change
-	$dimMatrix = $_POST['dim'];
 	$combinations = $_POST['combinations'];
 	if (isset($_POST['regenerate']))   // if pressed regenerate button
+	{
+		$dimMatrix = ((is_numeric($_POST['dim']) && intval($_POST['dim']) >= 1
+				&& intval($_POST['dim']) <= 100)? intval($_POST['dim']) : rand(2,5));
 		$matrix = randomMatrix($dimMatrix);
+	}
 	else								// pressed transpose button
 		$matrix = transpose(unserialize($_POST['matrix']));
+		$dimMatrix = count($matrix);
 }
 else // the page was reloaded
 {
