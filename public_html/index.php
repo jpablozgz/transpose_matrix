@@ -12,8 +12,10 @@ if($_POST) // a button was pressed
 		$matrix = randomMatrix($dimMatrix);
 	}
 	else								// pressed transpose button
+	{
 		$matrix = transpose(unserialize($_POST['matrix']));
 		$dimMatrix = count($matrix);
+	}
 }
 else // the page was reloaded
 {
